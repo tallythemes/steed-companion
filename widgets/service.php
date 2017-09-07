@@ -4,8 +4,8 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_service')):
 		
 		function __construct() {
 			parent::__construct(
-				'SteedCOM_widget_service', // Base ID of your widget
-				__('(SC) Quote', 'steed-companion'), // Widget name will appear in UI
+				'steedcom_widget_service', // Base ID of your widget
+				__('(SC) Service', 'steed-companion'), // Widget name will appear in UI
 				array( 
 					'description' => __( 'Use it for Services', 'steed-companion' ), 
 					//'customize_selective_refresh' => true

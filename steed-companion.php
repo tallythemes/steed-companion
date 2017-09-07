@@ -77,13 +77,15 @@ add_action( 'wp_enqueue_scripts', 'SteedCOM_front_script' );
 	Load Widgets
 ------------------------------------------*/
 function SteedCOM_load_widget() {
-	register_widget( 'SteedCOM_widget_AdvanceText' );
+	//register_widget( 'SteedCOM_widget_AdvanceText' );
 	register_widget( 'SteedCOM_widget_SliderItem' );
 	register_widget( 'SteedCOM_widget_vCard' );
 	register_widget( 'SteedCOM_widget_quote' );
+	register_widget( 'SteedCOM_widget_service' );
 }
 add_action( 'widgets_init', 'SteedCOM_load_widget' );
-include(STEEDCOM_DRI.'/widgets/advance-text-widget.php');
+//include(STEEDCOM_DRI.'/widgets/advance-text-widget.php');
 include(STEEDCOM_DRI.'/widgets/slider-item-widget.php');
 include(STEEDCOM_DRI.'/widgets/vCard.php');
 include(STEEDCOM_DRI.'/widgets/quote.php');
+include(STEEDCOM_DRI.'/widgets/service.php');
