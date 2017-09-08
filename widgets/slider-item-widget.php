@@ -14,6 +14,7 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 			);
 			
 			add_action( 'admin_enqueue_scripts', array($this, 'widgets_scripts') );
+			add_action( 'admin_footer-widgets.php', array( $this, 'print_scripts' ), 9999 );
 		}
 		
 		
@@ -79,18 +80,19 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 				<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Content:' ); ?></label> 
                 <textarea class="widefat" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" style="height:150px;"><?php echo wp_kses_post( $text ); ?></textarea> 
 			</p>
-            <p class="scw-img">
-				<label for="<?php echo $this->get_field_id( 'img' ); ?>"><?php _e( 'Image:' ); ?></label> 
-                <table>
-                	<tr>
-                    	<td><input class="widefat" id="<?php echo $this->get_field_id( 'img' ); ?>" name="<?php echo $this->get_field_name( 'img' ); ?>" type="text" value="<?php echo esc_url( $img ); ?>" /></td>
-                        <td><input type="button" class="button button-primary" id="<?php echo $this->get_field_id( 'img' ); ?>-btn" value="Upload"  /></td>
-                        <td><a href="#" class="button" id="<?php echo $this->get_field_id( 'img' ); ?>-remove">X</a></td>
-                    </tr>
-                </table>
-                <?php 
-					if ( $img == '' ){ $img_src = STEEDCOM_URL.'/assets/img/no-img.png'; }else{ $img_src = $img; }
-					echo '<img src="' . $img_src . '" style="max-width:100%;" id="'.$this->get_field_id( 'img' ).'-src" /><br />'; 
+            <p class="scw-img">                
+                <?php
+				$src = (!empty($img)) ? $img : 'https://www.placehold.it/115x115';
+				echo '
+					<div class="upload" style="max-width:400px;">
+						<img data-src="https://www.placehold.it/115x115" src="' . $src . '" style="max-width:100%; height:auto;"/>
+						<div>
+							<input id="'.$this->get_field_id( 'img' ).'" type="hidden" name="' . $this->get_field_name( 'img' ) . '" value="' . $img . '" />
+							<button type="submit" class="scw-image-upload-btn button" title="Upload Image">' . __('Upload', 'igsosd') . '</button>
+							<button type="submit" class="scw-image-remove-btn button" title="Remove Image">&times;</button>
+						</div>
+					</div>
+				';
 				?>
                 
 			</p>
@@ -140,39 +142,7 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
             
             <script type="text/javascript">
 				jQuery(document).ready(function($) { 
-					jQuery('.scw-color-picker').wpColorPicker()
-				});
-				jQuery(document).ready( function($) {
-					function media_upload(button_class) {
-						var _custom_media = true,
-						_orig_send_attachment = wp.media.editor.send.attachment;
-				
-						$('body').on('click', button_class, function(e) {
-							var button_id ='#'+$(this).attr('id');
-							var self = $(button_id);
-							var send_attachment_bkp = wp.media.editor.send.attachment;
-							var button = $(button_id);
-							var id = button.attr('id').replace('_button', '');
-							_custom_media = true;
-							wp.media.editor.send.attachment = function(props, attachment){
-								if ( _custom_media  ) {
-									$('#<?php echo $this->get_field_id( 'img' ); ?>').val(attachment.url);
-									$('#<?php echo $this->get_field_id( 'img' ); ?>-src').attr('src',attachment.url).css('display','block');
-								} else {
-									return _orig_send_attachment.apply( button_id, [props, attachment] );
-								}
-							}
-							wp.media.editor.open(button);
-								return false;
-						});
-					}
-					media_upload('#<?php echo $this->get_field_id( 'img' ); ?>-btn');
-					
-					$('body').on('click', '#<?php echo $this->get_field_id( 'img' ); ?>-remove', function(e) {
-						$('#<?php echo $this->get_field_id( 'img' ); ?>').attr('value', '');
-						$('#<?php echo $this->get_field_id( 'img' ); ?>-src').attr('src', '');
-						return false;
-					});
+					//jQuery('.scw-color-picker').wpColorPicker()
 				});
 			</script>
 			<?php 
@@ -208,6 +178,35 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 			wp_enqueue_script( 'wp-color-picker' ); 
 			wp_enqueue_media();
 		}
+		
+		
+		function print_scripts() {
+	                ?>
+	                <script>
+	                        ( function( $ ){
+	                                function initColorPicker( widget ) {
+	                                        widget.find( '.scw-color-picker' ).wpColorPicker( {
+	                                                change: _.throttle( function() { // For Customizer
+	                                                        $(this).trigger( 'change' );
+	                                                }, 3000 )
+	                                        });
+	                                }
+	
+	                                function onFormUpdate( event, widget ) {
+	                                        initColorPicker( widget );
+	                                }
+	
+	                                $( document ).on( 'widget-added widget-updated', onFormUpdate );
+	
+	                                $( document ).ready( function() {
+	                                        $( '#widgets-right .widget:has(.scw-color-picker)' ).each( function () {
+	                                                initColorPicker( $( this ) );
+	                                        } );
+	                                } );
+	                        }( jQuery ) );
+	                </script>
+	                <?php
+	        }
 	
 	}
 endif;

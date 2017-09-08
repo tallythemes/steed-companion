@@ -55,8 +55,10 @@ function SteedCOM_load(){
 	files.
 ------------------------------------------*/
 function SteedCOM_admin_script() {
+	wp_enqueue_style('wp-color-picker');
+	wp_enqueue_media();
 	wp_enqueue_style( 'steed-companion-admin', STEEDCOM_URL . '/assets/css/steed-companion-admin.css');
-	wp_enqueue_script( 'steed-companion-admin', STEEDCOM_URL.'/assets/js/steed-companion-admin.js', array('jquery'), '', true ); 
+	wp_enqueue_script( 'steed-companion-admin', STEEDCOM_URL.'/assets/js/steed-companion-admin.js',  array( 'wp-color-picker', 'jquery-ui-core', 'jquery-ui-sortable', "jquery-ui-tabs" ), '', true ); 
 }
 add_action( 'admin_enqueue_scripts', 'SteedCOM_admin_script' );
 

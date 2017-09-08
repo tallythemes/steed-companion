@@ -1,46 +1,7 @@
 /*
 	Slider Item Widgets
 ------------------------------------------------*/
-.SteedCOM_widget_SliderItem{
-	text-align:center;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-}
-.SteedCOM_widget_SliderItem .scw-warp-in{
-	position:relative;
-	height:400px;
-	width:90%;
-	max-width:980px;
-	margin:0 auto;
-}
-.SteedCOM_widget_SliderItem .scw-content{
-	 position: absolute;
-	 top: 50%;
-	 transform: translateY(-50%);
-	 width: 100%;
-	 z-index:1;
-}
-.SteedCOM_widget_SliderItem .scw-content-in{
-	
-}
-.SteedCOM_widget_SliderItem .scw-title{
-	
-}
-.SteedCOM_widget_SliderItem .scw-subtitle{
-	
-}
-.SteedCOM_widget_SliderItem .scw-text{
-	
-}
-.SteedCOM_widget_SliderItem .scw-overlay{
-	position:absolute;
-	height:100%;
-	width:100%;
-	left:0;
-	top:0;
-	z-index:0;
-}
+
 
 
 

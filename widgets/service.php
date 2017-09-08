@@ -40,7 +40,7 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_service')):
 						
 						echo '<div class="scw-content">';
 							echo '<div class="scw-headings">';
-								if(!empty($title)){ echo '<h3>' . $link_start . $title . $link_end .'</h4>';}
+								if(!empty($title)){ echo '<h4>' . $link_start . $title . $link_end .'</h4>';}
 								if(!empty($instance['subtitle'])){ echo '<strong>'.$instance['subtitle'] .'</strong>';}
 							echo '</div>';
 							if(!empty($instance['text'])){ echo '<div class="scw-text"></div>'; }
