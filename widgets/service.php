@@ -28,25 +28,31 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_service')):
 				$link_end = '</a>';
 			}
 			
+			$button_link = (!empty($instance['button_link'])) ? $instance['button_link'] : NULL;
+			$button_text = (!empty($instance['button_text'])) ? $instance['button_text'] : NULL;
+			$text = (!empty($instance['text'])) ? $instance['text'] : NULL;
+			$subtitle = (!empty($instance['subtitle'])) ? $instance['subtitle'] : NULL;
+			$img = (!empty($instance['subtitle'])) ? $instance['img'] : NULL;
+			
 			// before and after widget arguments are defined by themes
 			echo $args['before_widget'];
 				echo '<div class="scw-warp SteedCOM_widget_service">';
 					echo '<div class="scw-warp-in">'; 
 						
 						if(!empty($instance['img'])){ 
-							echo '<div class="scw-image-bg">'.$link_start.'<span style="background-image:url('.esc_url($instance['img']).');"></span>'.$link_end.'</div>';
-							echo '<div class="scw-image">'.$link_start.'<img src="'.esc_url($instance['img']).'" alt="'.$title.'">'.$link_end.'</div>';
+							echo '<div class="scw-image-bg">'.$link_start.'<span style="background-image:url('.esc_url($img).');"></span>'.$link_end.'</div>';
+							echo '<div class="scw-image">'.$link_start.'<img src="'.esc_url($img).'" alt="'.$title.'">'.$link_end.'</div>';
 						}
 						
 						echo '<div class="scw-content">';
 							echo '<div class="scw-headings">';
 								if(!empty($title)){ echo '<h4>' . $link_start . $title . $link_end .'</h4>';}
-								if(!empty($instance['subtitle'])){ echo '<strong>'.$instance['subtitle'] .'</strong>';}
+								if(!empty($instance['subtitle'])){ echo '<strong>'.$subtitle .'</strong>';}
 							echo '</div>';
-							if(!empty($instance['text'])){ echo '<div class="scw-text"></div>'; }
+							if(!empty($text)){ echo '<div class="scw-text">'.wp_kses_post($text).'</div>'; }
 						echo '</div>';
 						
-						echo '<a class="scw-button" href="'.esc_url($instance['button_link']).'" target="_blank" rel="nofollow">'.wp_kses_post($instance['button_text']).'</a>';
+						echo '<a class="scw-button" href="'.esc_url($button_link).'" target="_blank" rel="nofollow">'.wp_kses_post($button_text).'</a>';
 						
 					echo '</div>';
 				echo '</div>';
