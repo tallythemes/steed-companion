@@ -32,7 +32,7 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_service')):
 			$button_text = (!empty($instance['button_text'])) ? $instance['button_text'] : NULL;
 			$text = (!empty($instance['text'])) ? $instance['text'] : NULL;
 			$subtitle = (!empty($instance['subtitle'])) ? $instance['subtitle'] : NULL;
-			$img = (!empty($instance['subtitle'])) ? $instance['img'] : NULL;
+			$img = (!empty($instance['img'])) ? $instance['img'] : NULL;
 			
 			// before and after widget arguments are defined by themes
 			echo $args['before_widget'];
