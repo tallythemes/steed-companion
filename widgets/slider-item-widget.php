@@ -25,6 +25,16 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 			$img = (!empty($instance['img'])) ? $instance['img'] : NULL;
 			$bg_color = (!empty($instance['bg_color'])) ? $instance['bg_color'] : NULL;
 			$overlay = (!empty($instance['overlay'])) ? $instance['overlay'] : NULL;
+			
+			$button_size = (!empty($instance['button_size'])) ? $instance['button_size'] : NULL;
+			$button_radius = (!empty($instance['button_radius'])) ? $instance['button_radius'] : NULL;
+			$button_style = (!empty($instance['button_style'])) ? $instance['button_style'] : NULL;
+			$button_color = (!empty($instance['button_color'])) ? $instance['button_color'] : NULL;
+			
+			$button2_size = (!empty($instance['button2_size'])) ? $instance['button2_size'] : NULL;
+			$button2_radius = (!empty($instance['button2_radius'])) ? $instance['button2_radius'] : NULL;
+			$button2_style = (!empty($instance['button2_style'])) ? $instance['button2_style'] : NULL;
+			$button2_color = (!empty($instance['button2_color'])) ? $instance['button2_color'] : NULL;
 		
 			// before and after widget arguments are defined by themes
 			echo $args['before_widget'];
@@ -36,8 +46,22 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 								if(!empty($title)){ echo'<h2 class="scw-title">' . $title . '</h2>';}
 								if(!empty($instance['subtitle'])){ echo '<h5 class="scw-subtitle">'.wp_kses_post($instance['subtitle']).'</h5>'; }
 								if(!empty($instance['text'])){ echo '<div class="scw-text">'.wp_kses_post($instance['text']).'</div>'; }
-								if(!empty($instance['link1'])){ echo '<a class="scw-button scw-button-1 pc-button" href="'.esc_url($instance['link1']).'">'.wp_kses_post($instance['button1']).'</a>'; }
-								if(!empty($instance['link2'])){ echo '<a class="scw-button scw-button-2 pc-button-o" href="'.esc_url($instance['link2']).'">'.wp_kses_post($instance['button2']).'</a>'; }
+								if(!empty($instance['link1'])){
+									
+									$button1_class = 'pc-btn';
+									if($button_size){ $button1_class .= ' pc-btn-'.$button_size; }
+									if($button_radius){ $button1_class .= ' pc-btn-'.$button_radius; }
+									if($button_style && $button_color){ $button1_class .= ' pc-btn-'.$button_style.'-'.$button_color.''; }
+									
+									echo '<a class="'.$button1_class.'" href="'.esc_url($instance['link1']).'">'.wp_kses_post($instance['button1']).'</a>'; 
+								}
+								if(!empty($instance['link2'])){
+									$button2_class = 'pc-btn';
+									if($button2_size){ $button2_class .= ' pc-btn-'.$button2_size; }
+									if($button2_radius){ $button2_class .= ' pc-btn-'.$button2_radius; }
+									if($button2_style && $button2_color){ $button2_class .= ' pc-btn-'.$button2_style.'-'.$button2_color.''; }
+									echo '<a class="'.$button2_class.'" href="'.esc_url($instance['link2']).'">'.wp_kses_post($instance['button2']).'</a>'; 
+								}
 							echo '</div>';
 						echo '</div>';
 					echo '</div>';
@@ -65,6 +89,17 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 			$color_mood = (!empty($instance['color_mood'])) ? $instance['color_mood'] : NULL;
 			$bg_color = (!empty($instance['bg_color'])) ? $instance['bg_color'] : NULL;
 			$overlay = (!empty($instance['overlay'])) ? $instance['overlay'] : NULL;
+			
+			
+			$button_size = (!empty($instance['button_size'])) ? $instance['button_size'] : NULL;
+			$button_radius = (!empty($instance['button_radius'])) ? $instance['button_radius'] : NULL;
+			$button_style = (!empty($instance['button_style'])) ? $instance['button_style'] : NULL;
+			$button_color = (!empty($instance['button_color'])) ? $instance['button_color'] : NULL;
+			
+			$button2_size = (!empty($instance['button2_size'])) ? $instance['button2_size'] : NULL;
+			$button2_radius = (!empty($instance['button2_radius'])) ? $instance['button2_radius'] : NULL;
+			$button2_style = (!empty($instance['button2_style'])) ? $instance['button2_style'] : NULL;
+			$button2_color = (!empty($instance['button2_color'])) ? $instance['button2_color'] : NULL;
 			
 			// Widget admin form
 			?>
@@ -97,19 +132,19 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
                 
 			</p>
             <p class="scw-link1">
-				<label for="<?php echo $this->get_field_id( 'link1' ); ?>"><?php _e( 'Link:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'link1' ); ?>"><?php _e( 'Button Link:' ); ?></label> 
 				<input class="widefat" id="<?php echo $this->get_field_id( 'link1' ); ?>" name="<?php echo $this->get_field_name( 'link1' ); ?>" type="text" value="<?php echo esc_url( $link1 ); ?>" />
 			</p>
             <p class="scw-button1">
-				<label for="<?php echo $this->get_field_id( 'button1' ); ?>"><?php _e( 'Link Text:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'button1' ); ?>"><?php _e( 'Button Text:' ); ?></label> 
 				<input class="widefat" id="<?php echo $this->get_field_id( 'button1' ); ?>" name="<?php echo $this->get_field_name( 'button1' ); ?>" type="text" value="<?php echo wp_kses_post( $button1 ); ?>" />
 			</p>
             <p class="scw-link2">
-				<label for="<?php echo $this->get_field_id( 'link2' ); ?>"><?php _e( 'Link #2:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'link2' ); ?>"><?php _e( 'Button 2 Link:' ); ?></label> 
 				<input class="widefat" id="<?php echo $this->get_field_id( 'link2' ); ?>" name="<?php echo $this->get_field_name( 'link2' ); ?>" type="text" value="<?php echo esc_url( $link2 ); ?>" />
 			</p>
             <p class="scw-button2">
-				<label for="<?php echo $this->get_field_id( 'button2' ); ?>"><?php _e( 'Link #2 Text:' ); ?></label> 
+				<label for="<?php echo $this->get_field_id( 'button2' ); ?>"><?php _e( 'Button 2 Text:' ); ?></label> 
 				<input class="widefat" id="<?php echo $this->get_field_id( 'button2' ); ?>" name="<?php echo $this->get_field_name( 'button2' ); ?>" type="text" value="<?php echo wp_kses_post( $button2 ); ?>" />
 			</p>
             <p class="scw-color_mood">
@@ -123,7 +158,7 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 				<label for="<?php echo $this->get_field_id( 'bg_color' ); ?>"><?php _e( 'Background Color:' ); ?></label> <br>
 				<input class="widefat scw-color-picker" id="<?php echo $this->get_field_id( 'bg_color' ); ?>" name="<?php echo $this->get_field_name( 'bg_color' ); ?>" type="text" value="<?php echo sanitize_hex_color( $bg_color ); ?>" />
 			</p>
-<p class="scw-overlay">
+			<p class="scw-overlay">
 				<label for="<?php echo $this->get_field_id( 'overlay' ); ?>"><?php _e( 'Background Overlay:' ); ?></label> 
                 <select class="widefat" id="<?php echo $this->get_field_id( 'overlay' ); ?>" name="<?php echo $this->get_field_name( 'overlay' ); ?>">
                 	<option <?php selected( $overlay, '0' ); ?> value="0">0</option>
@@ -139,12 +174,98 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
                     <option <?php selected( $overlay, '1' ); ?> value="1">1</option>
                 </select>
 			</p>
-            
-            <script type="text/javascript">
-				jQuery(document).ready(function($) { 
-					//jQuery('.scw-color-picker').wpColorPicker()
-				});
-			</script>
+            <div class="scw-button" style="border:solid 1px #eee; box-sizing:border-box; padding:10px; margin-bottom:20px;">
+            	<strong>Button #1 Style</strong>
+                <table>
+                	<tr>
+                    	<td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button_style' ); ?>">Style:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button_style' ); ?>" name="<?php echo $this->get_field_name( 'button_style' ); ?>">
+                             	<option <?php selected( $button_style, '' ); ?> value=""></option>
+                                <option <?php selected( $button_style, 'fill' ); ?> value="fill">Fill</option>
+         						<option <?php selected( $button_style, 'border' ); ?> value="border">Border</option>
+                            </select>
+                        </td>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button_color' ); ?>">Color:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button_color' ); ?>" name="<?php echo $this->get_field_name( 'button_color' ); ?>">
+                            	<option <?php selected( $button_style, '' ); ?> value=""></option>
+                                <option <?php selected( $button_color, 'primary' ); ?> value="primary">primary</option>
+         						<option <?php selected( $button_color, 'light' ); ?> value="light">light</option>
+                                <option <?php selected( $button_color, 'dark' ); ?> value="dark">dark</option>
+                                <option <?php selected( $button_color, 'green' ); ?> value="green">green</option>
+                                <option <?php selected( $button_color, 'red' ); ?> value="red">red</option>
+                            </select>
+                        </td>
+					</table>
+                    <table>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button_size' ); ?>">Size:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button_size' ); ?>" name="<?php echo $this->get_field_name( 'button_size' ); ?>">
+                            	<option <?php selected( $button_style, '' ); ?> value=""></option>
+                                <option <?php selected( $button_size, 'md' ); ?> value="md">default</option>
+                                <option <?php selected( $button_size, 'xl' ); ?> value="xl">xl</option>
+         						<option <?php selected( $button_size, 'lg' ); ?> value="lg">lg</option>
+                                <option <?php selected( $button_size, 'sm' ); ?> value="sm">sm</option>
+                                <option <?php selected( $button_size, 'xs' ); ?> value="xs">xs</option>
+                            </select>
+                        </td>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button_radius' ); ?>">Radius:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button_radius' ); ?>" name="<?php echo $this->get_field_name( 'button_radius' ); ?>">
+                            	<option <?php selected( $button_style, '' ); ?> value=""></option>
+                                <option <?php selected( $button_radius, 'round' ); ?> value="round">round</option>
+         						<option <?php selected( $button_radius, 'squire' ); ?> value="squire">squire</option>
+                                <option <?php selected( $button_radius, 'pill' ); ?> value="pill">pill</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="scw-button" style="border:solid 1px #eee; box-sizing:border-box; padding:10px; margin-bottom:20px;">
+            	<strong>Button #2 Style</strong>
+                <table>
+                	<tr>
+                    	<td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button2_style' ); ?>">Style:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button2_style' ); ?>" name="<?php echo $this->get_field_name( 'button2_style' ); ?>">
+                                <option <?php selected( $button2_style, 'fill' ); ?> value="fill">Fill</option>
+         						<option <?php selected( $button2_style, 'border' ); ?> value="border">Border</option>
+                            </select>
+                        </td>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button2_color' ); ?>">Color:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button2_color' ); ?>" name="<?php echo $this->get_field_name( 'button2_color' ); ?>">
+                                <option <?php selected( $button2_color, 'primary' ); ?> value="primary">primary</option>
+         						<option <?php selected( $button2_color, 'light' ); ?> value="light">light</option>
+                                <option <?php selected( $button2_color, 'dark' ); ?> value="dark">dark</option>
+                                <option <?php selected( $button2_color, 'green' ); ?> value="green">green</option>
+                                <option <?php selected( $button2_color, 'red' ); ?> value="red">red</option>
+                            </select>
+                        </td>
+                    </table>
+                    <table>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button2_size' ); ?>">Size:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button2_size' ); ?>" name="<?php echo $this->get_field_name( 'button2_size' ); ?>">
+                            	<option <?php selected( $button2_size, '' ); ?> value="">default size</option>
+                                <option <?php selected( $button2_size, 'xl' ); ?> value="xl">xl</option>
+         						<option <?php selected( $button2_size, 'lg' ); ?> value="lg">lg</option>
+                                <option <?php selected( $button2_size, 'lg' ); ?> value="sm">sm</option>
+                                <option <?php selected( $button2_size, 'lg' ); ?> value="xs">xs</option>
+                            </select>
+                        </td>
+                        <td style="width:50%;">
+                        	<label for="<?php echo $this->get_field_id( 'button2_radius' ); ?>">Radius:</label>
+                        	<select class="widefat" id="<?php echo $this->get_field_id( 'button2_radius' ); ?>" name="<?php echo $this->get_field_name( 'button2_radius' ); ?>">
+                                <option <?php selected( $button2_radius, 'round' ); ?> value="round">round</option>
+         						<option <?php selected( $button2_radius, 'squire' ); ?> value="squire">squire</option>
+                                <option <?php selected( $button2_radius, 'pill' ); ?> value="pill">pill</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 			<?php 
 		}
 		
@@ -165,6 +286,16 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
 			$instance['color_mood'] = ( ! empty( $new_instance['color_mood'] ) ) ? esc_attr( $new_instance['color_mood'] ) : '';
 			$instance['bg_color'] = ( ! empty( $new_instance['bg_color'] ) ) ? sanitize_hex_color( $new_instance['bg_color'] ) : '';
 			$instance['overlay'] = ( ! empty( $new_instance['overlay'] ) ) ? esc_attr( $new_instance['overlay'] ) : '';
+			
+			$instance['button_size'] = ( ! empty( $new_instance['button_size'] ) ) ? esc_attr( $new_instance['button_size'] ) : '';
+			$instance['button_radius'] = ( ! empty( $new_instance['button_radius'] ) ) ? esc_attr( $new_instance['button_radius'] ) : '';
+			$instance['button_style'] = ( ! empty( $new_instance['button_style'] ) ) ? esc_attr( $new_instance['button_style'] ) : '';
+			$instance['button_color'] = ( ! empty( $new_instance['button_color'] ) ) ? esc_attr( $new_instance['button_color'] ) : '';
+			
+			$instance['button2_size'] = ( ! empty( $new_instance['button2_size'] ) ) ? esc_attr( $new_instance['button2_size'] ) : '';
+			$instance['button2_radius'] = ( ! empty( $new_instance['button2_radius'] ) ) ? esc_attr( $new_instance['button2_radius'] ) : '';
+			$instance['button2_style'] = ( ! empty( $new_instance['button2_style'] ) ) ? esc_attr( $new_instance['button2_style'] ) : '';
+			$instance['button2_color'] = ( ! empty( $new_instance['button2_color'] ) ) ? esc_attr( $new_instance['button2_color'] ) : '';
 			
 			return $instance;
 		}
