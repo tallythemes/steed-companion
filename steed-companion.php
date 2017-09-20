@@ -3,7 +3,7 @@
 Plugin Name: Steed Companion
 Plugin URI: tallythemes.com/product/steed-companion/
 Description: Enhances Steed’s themes with extra functionalities.
-Version: 1.1
+Version: 1.2
 Author: TallyThemes
 Author URI: http://tallythemes.com/
 License: GPLv2 or later
