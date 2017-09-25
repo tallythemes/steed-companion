@@ -248,7 +248,8 @@ if(class_exists('WP_Widget') && !class_exists('SteedCOM_widget_SliderItem')):
                         <td style="width:50%;">
                         	<label for="<?php echo $this->get_field_id( 'button2_size' ); ?>">Size:</label>
                         	<select class="widefat" id="<?php echo $this->get_field_id( 'button2_size' ); ?>" name="<?php echo $this->get_field_name( 'button2_size' ); ?>">
-                            	<option <?php selected( $button2_size, '' ); ?> value="">default size</option>
+                            	<option <?php selected( $button2_size, '' ); ?> value=""></option>
+                                 <option <?php selected( $button_size, 'md' ); ?> value="md">default</option>
                                 <option <?php selected( $button2_size, 'xl' ); ?> value="xl">xl</option>
          						<option <?php selected( $button2_size, 'lg' ); ?> value="lg">lg</option>
                                 <option <?php selected( $button2_size, 'lg' ); ?> value="sm">sm</option>

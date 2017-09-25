@@ -3,7 +3,7 @@
 Plugin Name: Steed Companion
 Plugin URI: tallythemes.com/product/steed-companion/
 Description: Enhances Steed’s themes with extra functionalities.
-Version: 1.2
+Version: 1.2.1
 Author: TallyThemes
 Author URI: http://tallythemes.com/
 License: GPLv2 or later
@@ -33,9 +33,6 @@ if ( !function_exists( 'add_action' ) ) {
 	echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 	exit;
 }
-
-
-
 define( 'STEEDCOM_URL', plugin_dir_url( __FILE__ ) );
 define( 'STEEDCOM_DRI', plugin_dir_path( __FILE__ ) );
 
@@ -79,14 +76,12 @@ add_action( 'wp_enqueue_scripts', 'SteedCOM_front_script' );
 	Load Widgets
 ------------------------------------------*/
 function SteedCOM_load_widget() {
-	//register_widget( 'SteedCOM_widget_AdvanceText' );
 	register_widget( 'SteedCOM_widget_SliderItem' );
 	register_widget( 'SteedCOM_widget_vCard' );
 	register_widget( 'SteedCOM_widget_quote' );
 	register_widget( 'SteedCOM_widget_service' );
 }
 add_action( 'widgets_init', 'SteedCOM_load_widget' );
-//include(STEEDCOM_DRI.'/widgets/advance-text-widget.php');
 include(STEEDCOM_DRI.'/widgets/slider-item-widget.php');
 include(STEEDCOM_DRI.'/widgets/vCard.php');
 include(STEEDCOM_DRI.'/widgets/quote.php');

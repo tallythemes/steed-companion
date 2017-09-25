@@ -2,8 +2,8 @@
 Contributors: tallythemes, sazzadh
 Tags: tallythemes, steed, Steed Companion, Widgets, Shortcode, Customize
 Requires at least: 4.4
-Tested up to: 4.8.1
-Stable tag: 1.2
+Tested up to: 4.8.2
+Stable tag: 1.2.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -28,6 +28,9 @@ No, It will only work on Steed theme and it's child themes.
 
 
 == Change log ==
+= 1.2.1 =
+- Fixed button size issue of slider item widget
+
 = 1.2 =
 - Added: button style option on service and slider widget
 
